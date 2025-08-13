@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Project</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <h1>Project Team Vlogs</h1>
+    </header>
+    <main>
+        <p>Welcome to Project Team Vlogs! Here, our team shares ideas, issues, and findings to collaborate and improve our project together.</p>
+        <!-- Colleagues App Section -->
+        <section id="colleagues-app">
+            <h2>Team Ideas</h2>
+            <form id="issue-form">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <select id="type" required>
+                    <option value="Idea">Idea</option>
+                    <option value="Issue/Finding">Issue/Finding</option>
+                </select>
+                <textarea id="description" placeholder="Share your project idea or issue" required></textarea>
+                <button type="submit">Submit</button>
+            </form>
+            <ul id="issues-list"></ul>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Website Project</p>
+    </footer>
+    <script src="scripts/app.js"></script>
+</body>
+</html>
