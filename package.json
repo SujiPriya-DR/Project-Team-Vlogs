@@ -2,7 +2,7 @@
   "name": "website-project",
   "version": "1.0.0",
   "description": "A simple website project with HTML, CSS, and JavaScript.",
-  "main": "src/index.html",
+  "main": "index.html",
   "scripts": {
     "start": "live-server src",
     "build": "echo 'Build step not defined'",
