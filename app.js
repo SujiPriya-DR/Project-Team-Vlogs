@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Load entries from localStorage or initialize empty array
     let entries = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
+    let editIndex = null; // Track which entry is being edited
 
     renderEntries();
 
@@ -29,8 +30,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const name = document.getElementById('name').value.trim();
         const type = document.getElementById('type').value;
         const description = document.getElementById('description').value.trim();
+
         if (name && type && description) {
-            entries.push({ name, type, description });
+            if (editIndex !== null) {
+                // Edit mode: update entry
+                entries[editIndex] = { name, type, description };
+                editIndex = null;
+                form.querySelector('button[type="submit"]').textContent = 'Submit';
+            } else {
+                // Add mode: add new entry
+                entries.push({ name, type, description });
+            }
             localStorage.setItem(STORAGE_KEY, JSON.stringify(entries));
             renderEntries();
             form.reset();
@@ -39,9 +49,23 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function renderEntries() {
         list.innerHTML = '';
-        entries.forEach((item) => {
+        entries.forEach((item, idx) => {
             const li = document.createElement('li');
-            li.textContent = `[${item.type}] ${item.name}: ${item.description}`;
+            li.textContent = `[${item.type}] ${item.name}: ${item.description} `;
+
+            // Edit button
+            const editBtn = document.createElement('button');
+            editBtn.textContent = 'Edit';
+            editBtn.style.marginLeft = '10px';
+            editBtn.onclick = function() {
+                document.getElementById('name').value = item.name;
+                document.getElementById('type').value = item.type;
+                document.getElementById('description').value = item.description;
+                editIndex = idx;
+                form.querySelector('button[type="submit"]').textContent = 'Update';
+            };
+
+            li.appendChild(editBtn);
             list.appendChild(li);
         });
     }
